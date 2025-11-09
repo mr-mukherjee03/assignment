@@ -19,7 +19,7 @@ This document details the development process, challenges faced, and solutions i
 
 2.  **Transactional Logic:** I used the SQLAlchemy `Session` object (`db`) as a single unit of work. In the `borrow_book` endpoint, I added the `new_record` and updated the `book.is_available` property. I then called `db.commit()` *only once* at the very end. This ensures that both changes are sent to the database as a single transaction. If any part fails, the `db.close()` in the `finally` block of the `get_db` dependency will roll back the transaction, preventing inconsistent data.
 
-3.  **Search and Filtering:** I started with a base query (`query = db.query(models.Book)`). Then, I used `if` statements to check if the optional `search` or `available` query parameters were provided. If they were, I dynamically added `.filter()` conditions to the `query` object *before* finally calling `.all()` (or `.offset().limit().all()`). This builds a clean, single query instead of fetching all data and filtering in Python.
+3.  **Search and Filtering:** I started with a base query (`query = db.query(models.Book)`). Then, I used `if` statements to check if the optional `search` or `available` query parameters were provided. If they were, I dynamically added `.filter()` conditions to the `query` object *before* finally calling `.all()` (or `.offset().limit().all()`). This builds a clean, single query instead of fetching all data and filtering in Python. But use of ElasticSearch etc is recommended.
 
 ### What would you I differently if I had more time? 
 
@@ -27,8 +27,10 @@ This document details the development process, challenges faced, and solutions i
 * **Refresh Tokens:** Currently, the JWT token expires in 30 minutes, and the user must log in again. I would implement a more robust system with short-lived access tokens and long-lived refresh tokens stored securely (perhaps in an `httpOnly` cookie) to provide a seamless user experience.
 * **Async Database Calls:** I used synchronous database calls (`db.query(...)`) for simplicity and speed. With more time, I would integrate an async database driver (like `asyncpg` for PostgreSQL) and make all database interactions asynchronous using `async/await` to improve performance under load.
 * **More Advanced Validation:** I would add business-level validation, such as preventing a user from borrowing more than 5 books at a time or preventing a book from beind deleted if it's currently on loan. (Note: I did add the check for deleting borrowed books).
+* **Implement a Many-to-Many Author Relationship:** The current schema simplifies the author-book relationship to one-to-many (one author per book). This is a known limitation. Given more time, I would implement a proper many-to-many relationship using a book_authors association table, allowing a book to be linked to multiple authors.
 * **AI/ML based Recommendation Engine:** A recommendation engine based on semantic-search or RAG/Vector daatbases, enabling users to get recommendations for books.
 * **ChatBot/AI Agent:** Perform all these CRUD operations through an AI Agent leveraging LLM models.  
+* **Advanced Searching and Filtering:** Use ElasticSearch or similar with TrigramSimilarity , Ranking etc for a robust search feature.
 
 ### What did I learn from this assignment? 
 
