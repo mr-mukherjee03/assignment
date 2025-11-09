@@ -34,4 +34,4 @@ This assignment was an excellent exercise in building a complete, production-sty
 * I learned the practical importance of **FastAPI's Dependency Injection** system, not just for `get_db` but for creating a reusable, robust `get_current_user` dependency that secures endpoints.
 * I gained a much deeper understanding of the **relationship between SQLAlchemy ORM models and Pydantic schemas**. They look similar but serve different purposes (database tables vs. API data shapes), and linking them with `Config: from_attributes = True` is powerful.
 * I solidified my understanding of **transactional integrity** and how the `db.commit()` call is the single point of truth for a set of related database changes.
-* [cite_start]I learned how to **structure a project in a modular way** , separating routers, schemas, and database logic, which makes the code far more readable and maintainable.
+* I learned how to **structure a project in a modular way** , separating routers, schemas, and database logic, which makes the code far more readable and maintainable.
