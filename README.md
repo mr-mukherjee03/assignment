@@ -91,3 +91,41 @@ The project uses a modular structure for clear separation of concerns.
 |-- main.py     # Main FastAPI app instance
 ```
 
+## Example API Calls
+
+Here is an example workflow using `curl`.
+
+**1. Register a New User**
+This endpoint is open.
+```bash
+curl -X POST "[http://127.0.0.1:8000/api/v1/auth/register](http://127.0.0.1:8000/api/v1/auth/register)" \
+-H "Content-Type: application/json" \
+-d '{
+  "email": "user@example.com",
+  "password": "strongpassword123"
+}'
+```
+**2. Log In to get access token**
+This endpoint uses form data (x-www-form-urlencoded), not JSON, as required by OAuth2.
+```bash
+curl -X POST "[http://127.0.0.1:8000/api/v1/auth/login](http://127.0.0.1:8000/api/v1/auth/login)" \
+-H "Content-Type: application/x-www-form-urlencoded" \
+-d "username=user@example.com&password=strongpassword123"
+```
+Response :
+```
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsI...",
+  "token_type": "bearer"
+}
+```
+Use the Token for Protected Endpoints You must copy the access_token from the login step and use it as a Bearer token in the Authorization header for all following requests.
+
+```TOKEN="your_access_token_paste_it_here"```
+
+**3. View Borrowing History (Protected)**
+
+```bash
+curl -X GET "[http://127.0.0.1:8000/api/v1/borrow/history](http://127.0.0.1:8000/api/v1/borrow/history)" \
+-H "Authorization: Bearer $TOKEN"
+```
