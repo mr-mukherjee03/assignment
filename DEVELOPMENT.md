@@ -21,12 +21,14 @@ This document details the development process, challenges faced, and solutions i
 
 3.  **Search and Filtering:** I started with a base query (`query = db.query(models.Book)`). Then, I used `if` statements to check if the optional `search` or `available` query parameters were provided. If they were, I dynamically added `.filter()` conditions to the `query` object *before* finally calling `.all()` (or `.offset().limit().all()`). This builds a clean, single query instead of fetching all data and filtering in Python.
 
-### What would you I differently if you had more time? 
+### What would you I differently if I had more time? 
 
 * **User Roles (Admin vs. User):** I would add roles to the `User` model. This would allow me to restrict destructive endpoints (like `DELETE /books/` or `POST /authors/`) to "Admin" users only, while "User" accounts could only browse and borrow.
 * **Refresh Tokens:** Currently, the JWT token expires in 30 minutes, and the user must log in again. I would implement a more robust system with short-lived access tokens and long-lived refresh tokens stored securely (perhaps in an `httpOnly` cookie) to provide a seamless user experience.
 * **Async Database Calls:** I used synchronous database calls (`db.query(...)`) for simplicity and speed. With more time, I would integrate an async database driver (like `asyncpg` for PostgreSQL) and make all database interactions asynchronous using `async/await` to improve performance under load.
 * **More Advanced Validation:** I would add business-level validation, such as preventing a user from borrowing more than 5 books at a time or preventing a book from beind deleted if it's currently on loan. (Note: I did add the check for deleting borrowed books).
+* **AI/ML based Recommendation Engine:** A recommendation engine based on semantic-search or RAG/Vector daatbases, enabling users to get recommendations for books.
+* **ChatBot/AI Agent:** Perform all these CRUD operations through an AI Agent leveraging LLM models.  
 
 ### What did I learn from this assignment? 
 
