@@ -28,8 +28,8 @@ Here is how to set up and run the project locally.
 
 **1. Clone the Repository:**
 ```bash
-git clone [https://github.com/](https://github.com/)[mr-mukherjee03]/[assignment].git
-cd [assignment]
+git clone https://github.com/mr-mukherjee03/assignment.git
+cd assignment
 ```
 
 **2. Create a Virtual Environment:**
