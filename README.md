@@ -22,14 +22,14 @@ The API allows users to register, log in, and then perform CRUD operations on bo
 * **Server:** **Uvicorn**
 * **Environment Variables:** `pydantic-settings`
 
-## 🚀 Setup and Installation
+##  Setup and Installation
 
 Here is how to set up and run the project locally.
 
 **1. Clone the Repository:**
 ```bash
-git clone [https://github.com/](https://github.com/)[Your_GitHub_Username]/[Your_Repo_Name].git
-cd [Your_Repo_Name]
+git clone [https://github.com/](https://github.com/)[mr-mukherjee03]/[assignment].git
+cd [assignment]
 ```
 
 **2. Create a Virtual Environment:**
@@ -91,10 +91,3 @@ The project uses a modular structure for clear separation of concerns.
 |-- main.py     # Main FastAPI app instance
 ```
 
-## 📋 Example API Calls
-
-You can use `curl` or any API client like Postman. **Note:** You must get a `TOKEN` from the login endpoint and use it as a Bearer token for all protected routes.
-
-**1. Register a New User:**
-```bash
-curl -X POST "http
